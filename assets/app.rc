@@ -1,0 +1,13 @@
+// Resources attached to the executable.
+//
+// The screen saver picker, Explorer and the task bar all take their picture from
+// here.  The eye is procedural, so `tools/make_icon.py` renders it once and
+// writes `app.ico` with every size Windows asks for.
+//
+// Resource id 1 is deliberate: the shell picks the lowest-numbered icon group.
+1 ICON "app.ico"
+
+// Application manifest (RT_MANIFEST = 24).  This is what makes the settings
+// dialog render with the modern control theme instead of the Windows 95 one --
+// see the comment inside the manifest.
+1 24 "app.manifest"

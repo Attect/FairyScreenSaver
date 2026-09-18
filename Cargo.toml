@@ -1,0 +1,56 @@
+[package]
+name = "fairy-screensaver"
+version = "1.0.0"
+edition = "2021"
+rust-version = "1.85"
+description = "绝区零 Fairy 大眼睛屏幕保护程序 —— Rust + Vulkan 全程序化渲染"
+authors = ["Attect"]
+license = "MIT"
+readme = "README.md"
+repository = "https://github.com/Attect/FairyScreenSaver"
+keywords = ["screensaver", "vulkan", "windows", "wgsl"]
+categories = ["graphics", "rendering"]
+
+[[bin]]
+name = "FairyScreenSaver"
+path = "src/main.rs"
+
+[dependencies]
+ash = "0.38"
+windows-sys = { version = "0.61", features = [
+    "Win32_Foundation",
+    "Win32_Graphics_Gdi",
+    "Win32_UI_WindowsAndMessaging",
+    "Win32_UI_Input_KeyboardAndMouse",
+    "Win32_UI_Controls",
+    "Win32_UI_HiDpi",
+    "Win32_System_LibraryLoader",
+    "Win32_System_SystemServices",
+    "Win32_System_Threading",
+    "Win32_System_Com",
+] }
+
+nokhwa = { version = "0.10", default-features = false, features = [
+    "input-msmf",
+    "rgb",
+    "decoding",
+] }
+windows = { version = "0.62.2", features = ["Media_FaceAnalysis", "Graphics_Imaging", "Foundation", "Foundation_Collections", "Storage_Streams", "Win32_System_Com", "Win32_Foundation"] }
+windows-future = { version = "0.3.2", default-features = false, features = ["std"] }
+
+[build-dependencies]
+naga = { version = "30", features = ["wgsl-in", "spv-out"] }
+
+[target.'cfg(windows)'.build-dependencies]
+# Compiles assets/app.rc with the platform resource compiler (rc.exe from the
+# Windows SDK, or windres from MinGW) so the .exe/.scr carries the eye icon.
+embed-resource = "3"
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 1
+panic = "abort"
+
+[profile.dev]
+opt-level = 1

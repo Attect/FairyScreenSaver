@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+  Two things this manifest buys, both of which change how the settings window
+  looks far more than any amount of custom drawing:
+
+  * comctl32 v6.  Without it the process gets the pre-XP control rendering:
+    etched group boxes, 3D-pushed buttons, square combo boxes.  That is the
+    "retro" look.  With it every control is drawn by the modern Windows theme.
+  * Per-monitor DPI awareness, so the window is crisp on scaled displays and the
+    layout scale we compute is the one the user actually gets.
+
+  Note: XML comments must not contain a double hyphen, so do not reintroduce one
+  as a dash separator in here.  A malformed manifest fails the entire process
+  with "side by side configuration is incorrect".
+-->
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity type="win32"
+                        name="Microsoft.Windows.Common-Controls"
+                        version="6.0.0.0"
+                        processorArchitecture="*"
+                        publicKeyToken="6595b64144ccf1df"
+                        language="*"/>
+    </dependentAssembly>
+  </dependency>
+  <application xmlns="urn:schemas-microsoft-com:asm.v3">
+    <windowsSettings>
+      <dpiAwareness xmlns="http://schemas.microsoft.com/SMI/2016/WindowsSettings">permonitorv2</dpiAwareness>
+      <dpiAware xmlns="http://schemas.microsoft.com/SMI/2005/WindowsSettings">true/pm</dpiAware>
+    </windowsSettings>
+  </application>
+</assembly>

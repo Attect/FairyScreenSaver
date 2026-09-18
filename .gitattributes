@@ -1,0 +1,26 @@
+# 统一换行：仓库里一律 LF，检出时不因平台而异。
+# （Rust / WGSL / 脚本在 Windows 上都能正常处理 LF；.ico 是二进制，不做转换。）
+* text=auto eol=lf
+
+*.rs        text diff=rust
+*.wgsl      text
+*.toml      text
+*.md        text
+*.py        text
+*.js        text
+*.ps1       text
+*.rc        text
+*.manifest  text
+.gitattributes text
+.gitignore     text
+LICENSE        text
+
+# 二进制：不要动
+*.ico  binary
+*.png  binary
+*.bmp  binary
+*.exe  binary
+*.scr  binary
+
+# 生成物在 GitHub 的 diff 里折叠掉
+Cargo.lock linguist-generated
