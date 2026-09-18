@@ -1,17 +1,34 @@
 # FairyScreenSaver
 
-**绝区零 Fairy 屏幕保护程序**
+**绝区零 Fairy 屏幕保护程序** · **Zenless Zone Zero Fairy Screen Saver**
 
-用 **Rust + Vulkan** 从零实现的 Windows 屏幕保护程序。画面是《绝区零》里 **Fairy**
-那只蓝色大眼睛，配深蓝色科技感背景 —— 整只眼睛由片元着色器**程序化绘制**，没有
-一张贴图、没有顶点缓冲、没有混合状态。
+用 **Rust + Vulkan** 从零实现的 Windows 屏幕保护程序（屏保）。画面是《绝区零》
+（Zenless Zone Zero / ZZZ）里 **Fairy** 那只蓝色大眼睛，配深蓝色科技感背景 ——
+整只眼睛由片元着色器**程序化绘制**，没有一张贴图、没有顶点缓冲、没有混合状态。
+
+支持**多显示器**、**摄像头人脸注视**、**DPI 感知**，单文件绿色免安装，不需要
+Vulkan SDK，也不需要下载任何模型文件。
+
+> **English** — A Windows screen saver written from scratch in **Rust + Vulkan**,
+> showing the big blue eye of *Fairy* from *Zenless Zone Zero* (ZZZ). The whole eye is
+> drawn procedurally in a single fragment shader — no textures, no vertex buffers, no
+> blend state. Multi-monitor aware, with optional **webcam face tracking** so the pupil
+> follows you around the room and the eye hops to whichever screen you are nearest to.
+> Standard screen saver protocol (`/s` `/c` `/p`), MIT licensed, Windows 10/11 with
+> Vulkan 1.1+.
 
 ![预览](docs/eye.png)
 
 ![license](https://img.shields.io/badge/license-MIT-0071e3) ![platform](https://img.shields.io/badge/platform-Windows-0078d4) ![rust](https://img.shields.io/badge/Rust-1.85%2B-dea584) ![api](https://img.shields.io/badge/Vulkan-1.1%2B-a41e22)
 
-## 特性
+## 技术栈
 
+`Rust` · `Vulkan`（`ash` 裸绑定）· `WGSL`（构建期由 `naga` 编到 SPIR-V）·
+`windows-sys`（Win32）· `windows` + `windows-future`（WinRT）·
+`nokhwa` + Media Foundation（摄像头采集）·
+WinRT `Windows.Media.FaceAnalysis`（人脸检测）· `comctl32 v6` + DWM（设置界面）
+
+## 特性
 * **全程序化渲染** —— 整屏由一个全屏三角形的片元着色器逐层合成，透明用 alpha
   的 source-over 手算。眼睛包围盒之外的像素直接跳过整段计算。
 * **多显示器** —— 每个显示器一个全屏窗口 + 一条独立交换链，默认只在主屏显示。
