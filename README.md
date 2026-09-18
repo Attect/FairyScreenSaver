@@ -9,7 +9,7 @@
 支持**多显示器**、**摄像头人脸注视**、**DPI 感知**，单文件绿色免安装，不需要
 Vulkan SDK，也不需要下载任何模型文件。
 
-> **English** — A Windows screen saver written from scratch in **Rust + Vulkan**,
+> **English** — A Windows **screensaver** written from scratch in **Rust + Vulkan**,
 > showing the big blue eye of *Fairy* from *Zenless Zone Zero* (ZZZ). The whole eye is
 > drawn procedurally in a single fragment shader — no textures, no vertex buffers, no
 > blend state. Multi-monitor aware, with optional **webcam face tracking** so the pupil
